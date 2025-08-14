@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Matcha – a modern, minimalist dating experience. Meet people you actually vibe with. Smart matching, real conversations, zero clutter." />
+    <meta name="theme-color" content="#0f0f10" />
+    <meta property="og:title" content="Matcha – Modern Dating" />
+    <meta property="og:description" content="Smart matching, real conversations, zero clutter." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og-image.png" />
+    <title>Matcha — Modern Dating</title>
+    <style>
+      /* --- Modern minimalist baseline --- */
+      *, *::before, *::after { box-sizing: border-box; }
+      :root {
+        --bg: #0b0b0c;
+        --panel: #111113;
+        --elev: #17171a;
+        --text: #f5f7fb;
+        --muted: #b2b6c6;
+        --line: #27272b;
+        --primary: #7c3aed; /* violet */
+        --primary-2: #16a34a; /* green */
+        --accent: #22c55e; /* lime */
+        --danger: #ef4444;
+        --radius: 14px;
+        --shadow-1: 0 10px 30px rgba(0,0,0,.35);
+        --shadow-2: 0 2px 10px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.03);
+        --container: 1120px;
+      }
+
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+        color: var(--text);
+        background: radial-gradient(1200px 600px at 10% -10%, rgba(124,58,237,.18), transparent 60%),
+                    radial-gradient(1200px 600px at 110% 10%, rgba(34,197,94,.14), transparent 60%),
+                    var(--bg);
+        letter-spacing: 0.2px;
+      }
+
+      a { color: inherit; text-decoration: none; }
+      img { max-width: 100%; display: block; }
+
+      .container { max-width: var(--container); margin: 0 auto; padding: 0 20px; }
+
+      /* --- Navigation --- */
+      .nav {
+        position: sticky;
+        top: 0; z-index: 50;
+        backdrop-filter: saturate(140%) blur(12px);
+        background: color-mix(in oklab, var(--bg) 92%, transparent);
+        border-bottom: 1px solid var(--line);
+      }
+      .nav__inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; }
+      .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: .4px; }
+      .brand__mark {
+        width: 28px; height: 28px; border-radius: 8px; position: relative; overflow: hidden;
+        background: linear-gradient(135deg, var(--primary), var(--primary-2));
+        box-shadow: 0 6px 18px rgba(124,58,237,.35), inset 0 0 18px rgba(255,255,255,.12);
+      }
+      .brand__mark::after { content: ""; position: absolute; inset: 1px; border-radius: 7px; background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,0)); }
+      .brand__name { font-size: 1.05rem; }
+      .nav__links { display: none; gap: 18px; color: var(--muted); }
+      .nav__cta { display: none; gap: 12px; }
+      .btn { appearance: none; border: 0; border-radius: calc(var(--radius) - 4px); padding: 10px 16px; font-weight: 600; cursor: pointer; }
+      .btn--ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+      .btn--primary {
+        color: #0d0d0e; background: linear-gradient(135deg, #a78bfa, #34d399);
+        box-shadow: 0 8px 24px rgba(124,58,237,.25), inset 0 1px 0 rgba(255,255,255,.25);
+      }
+      .menu { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--line); background: color-mix(in oklab, var(--panel) 86%, transparent); }
+
+      @media (min-width: 860px) {
+        .nav__links { display: inline-flex; }
+        .nav__cta { display: inline-flex; }
+        .menu { display: none; }
+      }
+
+      /* --- Hero --- */
+      .hero { padding: clamp(56px, 11vh, 120px) 0 32px; }
+      .hero__grid { display: grid; gap: 28px; align-items: center; grid-template-columns: 1fr; }
+      .eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--muted); font-weight: 600; letter-spacing: .5px; background: rgba(255,255,255,.04); border: 1px solid var(--line); padding: 8px 12px; border-radius: 999px; }
+      .eyebrow .dot { width: 7px; height: 7px; border-radius: 999px; background: var(--accent); box-shadow: 0 0 0 3px rgba(34,197,94,.2); }
+      .hero h1 { font-size: clamp(2rem, 4vw + 1rem, 4.2rem); line-height: 1.05; margin: 12px 0 12px; letter-spacing: -0.02em; }
+      .hero p { color: var(--muted); font-size: clamp(1rem, 1vw + .6rem, 1.15rem); max-width: 62ch; }
+      .hero__cta { display: flex; gap: 12px; align-items: center; margin-top: 22px; }
+      .hero__meta { margin-top: 12px; color: var(--muted); font-size: .95rem; }
+      .hero__visual {
+        border-radius: var(--radius);
+        background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow-1);
+        padding: 16px; display: grid; gap: 16px;
+      }
+      .screens { display: grid; grid-template-columns: 1fr; gap: 16px; }
+      .screen {
+        background: color-mix(in oklab, var(--panel) 86%, transparent);
+        border: 1px solid var(--line);
+        border-radius: calc(var(--radius) - 4px);
+        box-shadow: var(--shadow-2);
+        aspect-ratio: 16/9; position: relative; overflow: hidden;
+      }
+      .screen--gradient { background: linear-gradient(135deg, rgba(124,58,237,.35), rgba(16,185,129,.35)); }
+      .screen__glow { position: absolute; inset: -30% -10% auto; height: 60%; background: radial-gradient(closest-side, rgba(124,58,237,.55), transparent 70%); filter: blur(40px); }
+      .screen__bars { position: absolute; inset: 0; background: repeating-linear-gradient(90deg, rgba(255,255,255,.05) 0 1px, transparent 1px 12px); mix-blend-mode: overlay; }
+
+      @media (min-width: 980px) {
+        .hero__grid { grid-template-columns: 1.1fr .9fr; }
+        .screens { grid-template-columns: 1fr 1fr; }
+      }
+
+      /* --- Trust bar --- */
+      .trust { padding: 28px 0 12px; color: var(--muted); }
+      .trust__row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; align-items: center; opacity: .85; }
+      .trust__logo { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border: 1px dashed var(--line); border-radius: 12px; font-weight: 600; }
+      @media (min-width: 760px) { .trust__row { grid-template-columns: repeat(6, 1fr); } }
+
+      /* --- Features --- */
+      .section { padding: clamp(56px, 10vh, 110px) 0; }
+      .section__head { margin-bottom: 20px; display: grid; gap: 12px; }
+      .kicker { color: var(--accent); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-size: .82rem; }
+      .title { font-size: clamp(1.6rem, 2.4vw + .8rem, 2.6rem); letter-spacing: -0.02em; }
+      .lede { color: var(--muted); max-width: 70ch; }
+      .features { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 8px; }
+      .card {
+        background: color-mix(in oklab, var(--panel) 86%, transparent);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 18px;
+        box-shadow: var(--shadow-2);
+      }
+      .card h3 { margin: 8px 0 4px; letter-spacing: -0.01em; }
+      .card p { color: var(--muted); }
+      .icon {
+        width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center;
+        background: linear-gradient(135deg, rgba(124,58,237,.25), rgba(34,197,94,.25));
+        border: 1px solid var(--line);
+      }
+      @media (min-width: 860px) { .features { grid-template-columns: repeat(3, 1fr); } }
+
+      /* --- Testimonial --- */
+      .quote {
+        display: grid; grid-template-columns: 1fr; gap: 20px; align-items: center;
+        background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+        border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-1);
+        padding: 20px;
+      }
+      .quote p { font-size: clamp(1.05rem, 1.2vw + .8rem, 1.3rem); }
+      .avatar { width: 44px; height: 44px; border-radius: 999px; background: linear-gradient(135deg, #a78bfa, #34d399); border: 2px solid #101012; }
+      @media (min-width: 920px) { .quote { grid-template-columns: 1.2fr .8fr; } }
+
+      /* --- FAQ --- */
+      .faq { display: grid; grid-template-columns: 1fr; gap: 12px; }
+      .faq details { border: 1px solid var(--line); border-radius: calc(var(--radius) - 6px); background: color-mix(in oklab, var(--panel) 90%, transparent); padding: 14px 16px; }
+      .faq summary { cursor: pointer; list-style: none; font-weight: 600; }
+      .faq summary::-webkit-details-marker { display: none; }
+      .faq p { color: var(--muted); }
+
+      /* --- Footer --- */
+      footer { border-top: 1px solid var(--line); padding: 26px 0; color: var(--muted); }
+      .foot { display: grid; grid-template-columns: 1fr; gap: 16px; align-items: center; }
+      .foot__right { display: flex; gap: 14px; flex-wrap: wrap; justify-content: flex-start; }
+      @media (min-width: 760px) {
+        .foot { grid-template-columns: 1fr auto; }
+        .foot__right { justify-content: flex-end; }
+      }
+
+      /* --- Utilities --- */
+      .hidden { display: none !important; }
+      .pill { border-radius: 999px; padding: 8px 12px; border: 1px solid var(--line); background: rgba(255,255,255,.04); color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="container nav__inner">
+        <a class="brand" href="#">
+          <span aria-hidden="true" class="brand__mark"></span>
+          <span class="brand__name">Matcha</span>
+        </a>
+        <div class="nav__links" aria-label="Primary">
+          <a href="#features">Features</a>
+          <a href="#stories">Stories</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="nav__cta">
+          <a class="btn btn--ghost" href="#">Sign in</a>
+          <a class="btn btn--primary" href="#get-started">Get started</a>
+        </div>
+        <button class="menu" id="menuBtn" aria-label="Open menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden" style="position: sticky; top: 64px; z-index: 40; border-bottom: 1px solid var(--line); background: color-mix(in oklab, var(--bg) 94%, transparent); backdrop-filter: blur(8px);">
+      <div class="container" style="display: grid; gap: 8px; padding: 12px 0 16px;">
+        <a class="pill" href="#features">Features</a>
+        <a class="pill" href="#stories">Stories</a>
+        <a class="pill" href="#faq">FAQ</a>
+        <div style="display: flex; gap: 8px;">
+          <a class="btn btn--ghost" style="flex: 1; text-align: center;" href="#">Sign in</a>
+          <a class="btn btn--primary" style="flex: 1; text-align: center;" href="#get-started">Get started</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <header class="hero">
+      <div class="container hero__grid">
+        <div>
+          <span class="eyebrow"><span class="dot" aria-hidden="true"></span> Modern dating, minus the noise</span>
+          <h1>Meet people you actually vibe with</h1>
+          <p>
+            Matcha blends thoughtful design with smart matching so you spend less time swiping and more time connecting. Clean. Calm. Human.
+          </p>
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="#get-started">Create your profile</a>
+            <a class="btn btn--ghost" href="#features">Explore features</a>
+          </div>
+          <div class="hero__meta">Free to try. No ads. Your data stays yours.</div>
+        </div>
+        <div class="hero__visual" aria-label="Product preview">
+          <div class="screens">
+            <div class="screen screen--gradient">
+              <div class="screen__glow"></div>
+              <div class="screen__bars"></div>
+            </div>
+            <div class="screen">
+              <div class="screen__bars"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Trust bar -->
+    <section class="trust" aria-label="Trusted by">
+      <div class="container trust__row">
+        <div class="trust__logo">✦ Wired</div>
+        <div class="trust__logo">✦ ProductHunt</div>
+        <div class="trust__logo">✦ The Verge</div>
+        <div class="trust__logo">✦ IndieHackers</div>
+        <div class="trust__logo">✦ FastCompany</div>
+        <div class="trust__logo">✦ Mashable</div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <main>
+      <section id="features" class="section">
+        <div class="container">
+          <div class="section__head">
+            <div class="kicker">Features</div>
+            <h2 class="title">Designed for real connections</h2>
+            <p class="lede">An interface that gets out of your way, and a matching engine that surfaces people worth your attention.</p>
+          </div>
+          <div class="features">
+            <article class="card">
+              <div class="icon" aria-hidden="true">💫</div>
+              <h3>Smart matching</h3>
+              <p>Signals over swipes. We consider shared intent, conversational energy, and schedule compatibility.</p>
+            </article>
+            <article class="card">
+              <div class="icon" aria-hidden="true">🔒</div>
+              <h3>Privacy by default</h3>
+              <p>End-to-end encrypted messages, ephemeral activity, and transparent controls. Your data stays yours.</p>
+            </article>
+            <article class="card">
+              <div class="icon" aria-hidden="true">🎯</div>
+              <h3>Less noise</h3>
+              <p>No ads. No infinite feeds. Just a calm space to meet, talk, and decide what’s next.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quote / Story -->
+      <section id="stories" class="section">
+        <div class="container quote">
+          <div>
+            <p>“We met on Matcha and scheduled coffee in under 10 minutes. Zero chaos, just a great conversation that turned into many more.”</p>
+            <div style="display: flex; align-items: center; gap: 12px; margin-top: 10px;">
+              <div class="avatar" aria-hidden="true"></div>
+              <div>
+                <div style="font-weight: 700;">Ava & Leo</div>
+                <div style="color: var(--muted);">Together since 2024</div>
+              </div>
+            </div>
+          </div>
+          <div style="display:grid; gap: 10px;">
+            <div class="card">
+              <div class="icon" aria-hidden="true">⚡</div>
+              <h3>Frictionless intros</h3>
+              <p>Thoughtful prompts, icebreakers that don’t cringe, and calendar-aware scheduling.</p>
+            </div>
+            <div class="card">
+              <div class="icon" aria-hidden="true">🌱</div>
+              <h3>Healthy boundaries</h3>
+              <p>Focus windows and message pacing help conversations grow at a human pace.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="section">
+        <div class="container">
+          <div class="section__head">
+            <div class="kicker">FAQ</div>
+            <h2 class="title">Answers, at a glance</h2>
+            <p class="lede">A few common questions about how Matcha works and what to expect.</p>
+          </div>
+          <div class="faq">
+            <details>
+              <summary>Is Matcha free?</summary>
+              <p>Yes. Core features are free. A Plus plan unlocks advanced filters and weekly boosts.</p>
+            </details>
+            <details>
+              <summary>How do you protect my privacy?</summary>
+              <p>We store the minimum viable data, encrypt messages end-to-end, and never sell data to advertisers.</p>
+            </details>
+            <details>
+              <summary>What cities are supported?</summary>
+              <p>We’re live globally. Smart matching automatically adapts to your city’s density.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container foot">
+        <div style="display:flex; align-items:center; gap: 10px;">
+          <span class="brand__mark" aria-hidden="true"></span>
+          <span>© <span id="year"></span> Matcha</span>
+        </div>
+        <div class="foot__right">
+          <a href="#">Terms</a>
+          <a href="#">Privacy</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      const menuBtn = document.getElementById('menuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      menuBtn?.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.contains('hidden');
+        mobileMenu.classList.toggle('hidden');
+        menuBtn.setAttribute('aria-label', isHidden ? 'Close menu' : 'Open menu');
+      });
+
+      // Close mobile menu on nav click
+      mobileMenu?.addEventListener('click', (e) => {
+        const t = e.target;
+        if (t.tagName === 'A') mobileMenu.classList.add('hidden');
+      });
+
+      // Current year
+      document.getElementById('year').textContent = String(new Date().getFullYear());
+    </script>
+  </body>
+  </html>
+
+

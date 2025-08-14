@@ -1,21 +1,17 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
+	"log"
 
-	"goji.io"
-	"goji.io/pat"
+	"github.com/gofiber/fiber/v2"
 )
 
-func hello(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello, Travler!")
-}
-
 func main() {
-	mux := goji.NewMux()
-	mux.HandleFunc(pat.Get("/"), hello)
+	app := fiber.New()
 
-	http.ListenAndServe("localhost:8000", mux)
-	fmt.Println("Server is running on port 8000")
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("Hello, World!")
+	})
+
+	log.Fatal(app.Listen(":3000"))
 }
